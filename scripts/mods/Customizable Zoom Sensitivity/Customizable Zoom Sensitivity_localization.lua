@@ -18,7 +18,7 @@ return {
 		en = "Coefficient"
 	},
 	fov_ratio_coef_tooltip = {
-		en = "A higher value means higher sensitivity while zoomed in. 100%% is the same as vanilla, 133%% is the same as CS:GO.\nOnly has an effect if \"Custom FOV Ratio Coefficient\" is used."
+		en = "A higher value means higher sensitivity while zoomed in. 100%% is the same as vanilla, 133%% is the same as CS:GO.\nOnly has an affect if \"Custom FOV Ratio Coefficient\" is used."
 	},
 --[[
 	some_other_text_id = {
