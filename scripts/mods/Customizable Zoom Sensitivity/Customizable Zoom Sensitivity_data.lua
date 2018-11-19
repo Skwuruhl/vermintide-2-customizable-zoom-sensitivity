@@ -14,18 +14,18 @@ return {
 			["text"] = mod:localize("scaling_method_name"),
 			["tooltip"] = mod:localize("scaling_method_tooltip"),
 			["options"] = {
-				{text = mod:localize("setting_zoom"),		value = "zoom"},
-				{text = mod:localize("setting_fov"),		value = "fov"},
+				{text = mod:localize("setting_focal_length"),		value = "focal_length"},
+				{text = mod:localize("setting_aspect_ratio"),		value = "aspect_ratio"},
 			},
-			["default_value"] = "zoom"
+			["default_value"] = "focal_length"
 		},
 		{
-			["setting_name"] = "fov_ratio_coef",
+			["setting_name"] = "coefficient",
 			["widget_type"] = "numeric",
-			["text"] = mod:localize("fov_ratio_coef_name"),
-			["tooltip"] = mod:localize("fov_ratio_coef_tooltip"),
+			["text"] = mod:localize("coefficient_name"),
+			["tooltip"] = mod:localize("coefficient_tooltip"),
 			["unit_text"] = "%",
-			["range"] = {1, 300},
+			["range"] = {1, 200},
 			["default_value"] = 100
 		}
 	}

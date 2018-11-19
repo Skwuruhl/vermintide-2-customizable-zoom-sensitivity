@@ -6,19 +6,19 @@ return {
 		en = "Scaling Method"
 	},
 	scaling_method_tooltip = {
-		en = "Choose between scaling by zoom ratio or a custom FOV ratio."
+		en = "Choose between scaling by focal length or a custom FOV aspect ratio."
 	},
-	setting_zoom = {
-		en = "Zoom Ratio"
+	setting_focal_length = {
+		en = "Focal Length"
 	},
-	setting_fov = {
-		en = "Custom FOV Ratio Coefficient"
+	setting_aspect_ratio = {
+		en = "Aspect Ratio"
 	},
-	fov_ratio_coef_name = {
+	coefficient_name = {
 		en = "Coefficient"
 	},
-	fov_ratio_coef_tooltip = {
-		en = "A higher value means higher sensitivity while zoomed in. 100%% is the same as vanilla, 133%% is the same as CS:GO.\nOnly has an affect if \"Custom FOV Ratio Coefficient\" is used."
+	coefficient_tooltip = {
+		en = "Has a different effect for focal length or aspect ratio but for both a higher value means higher sensitivity while zoomed in.\nRefer to mod description for more detailed function."
 	},
 --[[
 	some_other_text_id = {

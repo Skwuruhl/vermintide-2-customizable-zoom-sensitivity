@@ -1,4 +1,5 @@
 local mod = get_mod("Customizable Zoom Sensitivity")
+local status_extension = ScriptUnit.extension(owner_unit, "status_system")
 
 local sensMult = 1.0
 local mode = mod:get("scaling_method")
@@ -13,7 +14,7 @@ local coef = 1.0
 -- "Private" function - not accessible to other mods
 local function update_sensMult()
 	sensMult = Application.user_setting("render_settings", "fov") * math.pi / 180
-	if mode == "zoom" then
+	if mode == "focal_length" then
 		sensMult = 200/157 * sensMult / math.tan(sensMult/2)
 	else
 		sensMult = 200/157 * sensMult / math.atan(coef*math.tan(sensMult/2))
@@ -22,7 +23,7 @@ end
 
 local function update_mode()
 	mode = mod:get("scaling_method")
-	coef = mod:get("fov_ratio_coef") / 100
+	coef = mod:get("coefficient") / 100
 end
 
 -- "Public" function - accessible to other mods
@@ -73,8 +74,14 @@ mod:hook_origin(CameraStateObserver, "update", function (self, unit, input, dt, 
 	local look_delta = Vector3(0, 0, 0)
 
 	if look_input then
-		if mode == "zoom" then
-			look_delta = look_delta + look_input * math.tan(look_sensitivity/2) * sensMult
+		if mode == "focal_length" then
+			if status_extension:is_zooming() then
+				look_delta = look_delta + look_input * math.tan(look_sensitivity/2) * sensMult * coef
+				mod:echo("is zooming")
+			else
+				look_delta = look_delta + look_input * math.tan(look_sensitivity/2) * sensMult
+				mod:echo("isn't zooming")
+			end
 		else
 			look_delta = look_delta + look_input * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult
 		end
@@ -111,8 +118,12 @@ mod:hook_origin(CharacterStateHelper, "look", function (input_extension, viewpor
 	local is_3p = false
 	local look_delta = CharacterStateHelper.get_look_input(input_extension, status_extension, inventory_extension, is_3p)
 	
-	if mode == "zoom" then
-		look_delta = look_delta * math.tan(look_sensitivity/2) * sensMult
+	if mode == "focal_length" then
+		if status_extension:is_zooming() then
+			look_delta = look_delta * math.tan(look_sensitivity/2) * sensMult * coef
+		else
+			look_delta = look_delta * math.tan(look_sensitivity/2) * sensMult
+		end
 	else
 		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult
 	end
