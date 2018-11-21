@@ -13,11 +13,11 @@ local coef = 1.0
 
 -- "Private" function - not accessible to other mods
 local function update_sensMult()
-	sensMult = Application.user_setting("render_settings", "fov") * math.pi / 180
+	local configFOV = Application.user_setting("render_settings", "fov") * math.pi / 180 --gets configured FOV in radians
 	if mode == "focal_length" then
-		sensMult = 200/157 * sensMult / math.tan(sensMult/2)
+		sensMult = configFOV / math.tan(configFOV/2) / 0.785 --calculates a sensitivity multiplier to make hipfire the same as without the mod.
 	else
-		sensMult = 200/157 * sensMult / math.atan(coef*math.tan(sensMult/2))
+		sensMult = configFOV / math.atan(coef*math.tan(configFOV/2)) / 0.785
 	end
 end
 
@@ -43,18 +43,18 @@ end
 -- If you want to do something more involved
 mod:hook_origin(CharacterStateHelper, "look", function (input_extension, viewport_name, first_person_extension, status_extension, inventory_extension, override_sens, override_delta)
 	local camera_manager = Managers.state.camera
-	local look_sensitivity = override_sens or (camera_manager:has_viewport(viewport_name) and camera_manager:fov(viewport_name)) or 1
+	local fieldOfView = override_sens or (camera_manager:has_viewport(viewport_name) and camera_manager:fov(viewport_name)) or 1 --modified "look_sensitivity" equation which is originally just fov / 0.785. So I removed the "/ 0.785"
 	local is_3p = false
 	local look_delta = CharacterStateHelper.get_look_input(input_extension, status_extension, inventory_extension, is_3p)
 	
-	if mode == "focal_length" then
-		if status_extension:is_zooming() then
-			look_delta = look_delta * math.tan(look_sensitivity/2) * sensMult * coef
+	if mode == "focal_length" then --replaced "look_delta = look_delta * look_sensitivity" with this.
+		if status_extension:is_zooming() then --only apply coefficient if zooming
+			look_delta = look_delta * math.tan(fieldOfView/2) * sensMult * coef
 		else
-			look_delta = look_delta * math.tan(look_sensitivity/2) * sensMult
+			look_delta = look_delta * math.tan(fieldOfView/2) * sensMult --makes sensitivity scale by the tangent of FOV instead of just by FOV. Again, sensMult is to offset the change in hipfire sensitivity so it's the same as vanilla.
 		end
 	else
-		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult
+		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult --makes sensivivity scale by a different FOV aspect ratio. E.g. 1.78 coefficient would be scaling by horizontal FOV since 16/9 is 1.78. Or 1.33 works like CS:GO etc.
 	end
 
 	if override_delta then
