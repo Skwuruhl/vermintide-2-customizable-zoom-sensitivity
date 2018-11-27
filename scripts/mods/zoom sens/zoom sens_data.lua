@@ -1,4 +1,4 @@
-local mod = get_mod("Customizable Zoom Sensitivity")
+local mod = get_mod("zoom sens")
 
 -- Everything here is optional. You can remove unused parts.
 return {
@@ -26,6 +26,7 @@ return {
 			["tooltip"] = mod:localize("coefficient_tooltip"),
 			["unit_text"] = "%",
 			["range"] = {1, 200},
+			["decimals_number"] = 2,
 			["default_value"] = 100
 		}
 	}

@@ -18,7 +18,7 @@ return {
 		en = "Coefficient"
 	},
 	coefficient_tooltip = {
-		en = "Has a different effect for focal length or aspect ratio but for both a higher value means higher sensitivity while zoomed in.\nRefer to mod description for more detailed function."
+		en = "Has a different effect for focal length or aspect ratio but for both a higher value means higher sensitivity while zoomed in.\nSupports 2 decimal places.\nRefer to mod description for more detailed function."
 	},
 --[[
 	some_other_text_id = {

@@ -1,4 +1,4 @@
-local mod = get_mod("Customizable Zoom Sensitivity")
+local mod = get_mod("zoom sens")
 local status_extension = ScriptUnit.extension(owner_unit, "status_system")
 
 local sensMult = 1.0
@@ -54,7 +54,7 @@ mod:hook_origin(CharacterStateHelper, "look", function (input_extension, viewpor
 			look_delta = look_delta * math.tan(fieldOfView/2) * sensMult --makes sensitivity scale by the tangent of FOV instead of just by FOV. Again, sensMult is to offset the change in hipfire sensitivity so it's the same as vanilla.
 		end
 	else
-		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult --makes sensivivity scale by a different FOV aspect ratio. E.g. 1.78 coefficient would be scaling by horizontal FOV since 16/9 is 1.78. Or 1.33 works like CS:GO etc.
+		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult --makes sensivivity scale by a different FOV aspect ratio. E.g. 177.78% coefficient would be scaling by horizontal FOV since 16/9 is 1.78. Or 133.33% works like CS:GO etc.
 	end
 
 	if override_delta then

@@ -1,0 +1,11 @@
+mod = [
+	"zoom sens"
+]
+
+package = [
+	"resource_packages/zoom sens/zoom sens"
+]
+
+lua = [
+	"scripts/mods/zoom sens/*"
+]
