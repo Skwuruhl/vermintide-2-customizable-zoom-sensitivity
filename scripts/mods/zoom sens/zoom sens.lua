@@ -54,7 +54,7 @@ mod:hook_origin(CharacterStateHelper, "look", function (input_extension, viewpor
 			look_delta = look_delta * math.tan(fieldOfView/2) * sensMult --makes sensitivity scale by the tangent of FOV instead of just by FOV. Again, sensMult is to offset the change in hipfire sensitivity so it's the same as vanilla.
 		end
 	else
-		look_delta = look_delta * math.atan(coef*math.tan(look_sensitivity/2)) * sensMult --makes sensivivity scale by a different FOV aspect ratio. E.g. 177.78% coefficient would be scaling by horizontal FOV since 16/9 is 1.78. Or 133.33% works like CS:GO etc.
+		look_delta = look_delta * math.atan(coef*math.tan(fieldOfView/2)) * sensMult --makes sensivivity scale by a different FOV aspect ratio. E.g. 177.78% coefficient would be scaling by horizontal FOV since 16/9 is 1.78. Or 133.33% works like CS:GO etc.
 	end
 
 	if override_delta then
@@ -74,15 +74,15 @@ end)
 
 -- Called on every update to mods
 -- dt - time in milliseconds since last update
-mod.update = function(dt)
+--[[ mod.update = function(dt)
 	
-end
+end ]]
 
 -- Called when all mods are being unloaded
 -- exit_game - if true, game will close after unloading
-mod.on_unload = function(exit_game)
+--[[ mod.on_unload = function(exit_game)
 	
-end
+end ]]
 
 -- Called when game state changes (e.g. StateLoading -> StateIngame)
 -- status - "enter" or "exit"
@@ -101,15 +101,15 @@ end
 
 -- Called when the checkbox for this mod is unchecked
 -- is_first_call - true if called right after mod initialization
-mod.on_disabled = function(is_first_call)
+--[[ mod.on_disabled = function(is_first_call)
 
-end
+end ]]
 
 -- Called when the checkbox for this is checked
 -- is_first_call - true if called right after mod initialization
-mod.on_enabled = function(is_first_call)
+--[[ mod.on_enabled = function(is_first_call)
 
-end
+end ]]
 
 
 --[[
