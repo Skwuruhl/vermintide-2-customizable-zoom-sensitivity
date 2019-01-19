@@ -5,7 +5,7 @@ return {
 	scaling_method = {
 		en = "Scaling Method"
 	},
-	scaling_method_tooltip = {
+	scaling_method_description = {
 		en = "Choose between scaling by zoom ratio or by monitor distance. Zoom ratio recommended."
 	},
 	setting_zoom_ratio = {
@@ -17,7 +17,7 @@ return {
 	coefficient = {
 		en = "Coefficient"
 	},
-	coefficient_tooltip = {
+	coefficient_description = {
 		en = "Has a different affect for zoom ratio or monitor distance but for both a higher value means higher sensitivity while zoomed in.\nSupports 2 decimal places.\nRefer to mod description for more detailed function."
 	},
 	unit_percent = {
