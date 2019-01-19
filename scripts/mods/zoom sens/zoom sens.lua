@@ -14,7 +14,7 @@ local coef = 1.0
 -- "Private" function - not accessible to other mods
 local function update_sensMult()
 	local configFOV = Application.user_setting("render_settings", "fov") * math.pi / 180 --gets configured FOV in radians
-	if mode == "focal_length" then
+	if mode == "zoom_ratio" then
 		sensMult = configFOV / math.tan(configFOV/2) / 0.785 --calculates a sensitivity multiplier to make hipfire the same as without the mod.
 	else
 		sensMult = configFOV / math.atan(coef*math.tan(configFOV/2)) / 0.785
@@ -47,7 +47,7 @@ mod:hook_origin(CharacterStateHelper, "look", function (input_extension, viewpor
 	local is_3p = false
 	local look_delta = CharacterStateHelper.get_look_input(input_extension, status_extension, inventory_extension, is_3p)
 	
-	if mode == "focal_length" then --replaced "look_delta = look_delta * look_sensitivity" with this.
+	if mode == "zoom_ratio" then --replaced "look_delta = look_delta * look_sensitivity" with this.
 		if status_extension:is_zooming() then --only apply coefficient if zooming
 			look_delta = look_delta * math.tan(fieldOfView/2) * sensMult * coef
 		else
