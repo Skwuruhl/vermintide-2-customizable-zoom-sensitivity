@@ -28,8 +28,10 @@ local update_sensMult = {
 }
 
 local scalingMethod = {
+	[1] = function(fov)	-- zoom ratio
 		return math.tan(fov/2) * coef * sensMult
 	end,
+	[2] = function(fov)	-- monitor distance
 		return math.atan(coef*math.tan(fov/2)) * sensMult
 	end
 }
